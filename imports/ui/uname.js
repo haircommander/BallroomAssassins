@@ -1,27 +1,31 @@
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
-import { addName } from '../api/name.js';
-import './name.html';
+import { addName } from '../api/uname.js';
+import './uname.html';
 
 
-Template.name.onCreated(function nameOnCreated() {
+Template.uname.onCreated(function unameOnCreated() {
   this.amChanging = new ReactiveVar(false);
 });
 
-Template.name.helpers({
+Template.uname.helpers({
   hasName() {
-    return Meteor.user().name !== undefined;
+    if (Meteor.user().uname === undefined) {
+        return false;
+    }
+    return true;
   },
   amChanging() {
     return Template.amChanging.get();
   }
 });
 
-Template.name.events({
-  'click .namesubmit'(event, instance) {
+Template.uname.events({
+  'submit .name'(event, instance) {
+    event.preventDefault();
     addName.call({
-      name: event.target.text.value
+      newName: event.target.name.value
     }, (err, res) => {
       if (err) {
         alert(err);
@@ -31,6 +35,7 @@ Template.name.events({
     });
   },
   'click .changename'(event, instance) {
+    event.preventDefault();
     instance.amChanging.set(true);
   }
     

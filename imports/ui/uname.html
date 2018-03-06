@@ -1,0 +1,11 @@
+<template name="uname">
+  {{# unless hasName }}
+    {{> form }}
+  {{/unless}}
+</template>
+
+<template name="form">
+  <form class = "name">
+    <input type="text" name="name">
+  </form>
+</template> 

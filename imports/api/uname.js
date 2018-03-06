@@ -1,19 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 
-//export const Name = new Mongo.Collection('colors');
-
 export const addName = {
-  name: 'name.addName',
+  name: 'uname.addName',
   // Factor out validation so that it can be run independently (1)
   validate(args) {
     new SimpleSchema({
-       name: {type: String},
+       newName: {type: String},
     }).validate(args)
   },
   // Factor out Method body so that it can be called independently (3)
-  run({ name }) {
-    Meteor.User().update({_id: this.userId}, {
-        $set: { name: name }
+  run({ newName }) {
+    Meteor.users.update(Meteor.userId, {
+        $set: { uname: newName }
     });
   },
   // Call Method by referencing the JS object (4)
