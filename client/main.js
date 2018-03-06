@@ -1,5 +1,3 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-
 import './main.html';
 import './accounts.js';
+import '../imports/ui/name.js';

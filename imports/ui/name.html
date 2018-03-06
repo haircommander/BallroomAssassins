@@ -1,0 +1,12 @@
+<template name="getName">
+  {{# if hasName }}
+    {{> form }}
+  {{/if}}
+</template>
+
+<template name="form">
+  <form class = "name">
+    <input type="text" name="text">
+    <button id="namesubmit">Submit</button>
+  </form>
+</template> 
