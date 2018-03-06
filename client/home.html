@@ -1,7 +1,11 @@
 <template name="home">
     {{#with currentUser}}
     <div class="ui raised segment">
-        <h1 class="ui header">Welcome Back Agent {{profile.agentName}}</h1>
+        <h1 class="ui header">
+            Welcome Back, Agent {{profile.agentName}}
+            <button class="ui blue big button right floated" id="logout-button" type="submit">Logout</button>
+        </h1>
+
     </div>
     {{/with}}
 </template>
