@@ -1,10 +1,7 @@
 accounts-base@1.4.2
 accounts-password@1.5.1
-accounts-ui@1.3.0
-accounts-ui-unstyled@1.4.0
-aldeed:simple-schema@1.5.3
 allow-deny@1.1.0
-autopublish@1.0.7
+arillo:flow-router-helpers@0.5.2
 autoupdate@1.4.0
 babel-compiler@7.0.5
 babel-runtime@1.2.2
@@ -18,6 +15,7 @@ caching-compiler@1.1.11
 caching-html-compiler@1.1.2
 callback-hook@1.1.0
 check@1.3.0
+coffeescript@1.0.17
 ddp@1.4.0
 ddp-client@2.3.1
 ddp-common@1.4.0
@@ -39,16 +37,19 @@ html-tools@1.0.11
 htmljs@1.0.11
 http@1.4.0
 id-map@1.1.0
-insecure@1.0.7
+jagi:astronomy@1.2.11
+jagi:astronomy-validators@1.1.2
+jagi:reactive-map@2.0.0
 jquery@1.11.11
+juliancwirko:postcss@1.3.0
 kadira:blaze-layout@2.3.0
 kadira:flow-router@2.12.1
+kevohagan:sweetalert@1.0.0
 launch-screen@1.1.1
 less@2.7.12
 livedata@1.0.18
 localstorage@1.2.0
 logging@1.1.19
-mdg:validation-error@0.2.0
 meteor@1.8.4
 meteor-base@1.3.0
 meteortoys:toykit@4.0.1
@@ -75,6 +76,8 @@ reactive-var@1.0.11
 reload@1.2.0
 retry@1.1.0
 routepolicy@1.0.12
+semantic:ui@2.2.6_5
+semantic:ui-data@2.2.6_4
 server-render@0.3.0
 service-configuration@1.0.11
 session@1.1.7
@@ -85,7 +88,6 @@ socket-stream-client@0.1.0
 spacebars@1.0.15
 spacebars-compiler@1.1.3
 srp@1.0.10
-standard-minifier-css@1.4.1
 standard-minifier-js@2.3.2
 templating@1.3.2
 templating-compiler@1.3.3
@@ -97,3 +99,4 @@ underscore@1.0.10
 url@1.2.0
 webapp@1.5.0
 webapp-hashing@1.0.9
+zimme:active-route@2.3.2

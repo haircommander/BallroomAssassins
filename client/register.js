@@ -3,8 +3,8 @@ Template.register.events({
         e.preventDefault();
         // Retrieve the input field values
         var email = $('#email').val(),
-            firstName = $('#first-name').val(),
-            lastName = $('#last-name').val(),
+            fullName = $('#full-name').val(),
+            agentName = $('#agent-name').val(),
             password = $('#password').val(),
             passwordAgain = $('#password-again').val();
 
@@ -33,8 +33,8 @@ Template.register.events({
         if (isValidPassword(password, passwordAgain)) { 
             Accounts.createUser({
                 email: email,
-                firstName: firstName,
-                lastName: lastName,
+                fullName: fullName,
+                agentName: agentName,
                 password: password
             }, function(error) {
                 if (error) {
