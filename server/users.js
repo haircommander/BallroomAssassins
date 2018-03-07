@@ -14,7 +14,8 @@ const attemptKill = {
     if (killCode !== target.profile.killCode) {
         throw new Meteor.Error('users.kills.wrongcode', "The user tried to kill with the incorrect code");
     }
-    target.profile.alive = false
+    target.profile.alive = false;
+    target.profile.target = false;
     Meteor.users.update({_id: id}, {
         $set: { profile: target.profile}
     });

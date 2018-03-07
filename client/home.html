@@ -10,9 +10,9 @@
         <div class="row">
             <div class="four wide column"></div>
             <div class="eight wide column middle aligned">
-                 <h3>You currently have {{profile.kills}} kills</h3>
-                 <h3> Your current target is {{profile.targetName}}</h3> 
                  {{#if profile.alive}}
+                     <h3>You currently have {{profile.kills}} kills</h3>
+                     <h3> Your current target is {{profile.targetName}}</h3> 
                      {{#if killing}}
                      <form class="ui form" id="kill-form" >
                          <div class="field">
