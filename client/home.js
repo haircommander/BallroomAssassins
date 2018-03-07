@@ -1,5 +1,12 @@
+import { createUser } from '../server/user-info.js';
 Template.home.onCreated(function homeOnCreated() {
   this.amKilling = new ReactiveVar(false);
+  this.getUId = () => Meteor.user();
+
+  this.autorun(() => {
+    Meteor.subscribe('thisUser', this.getUId);
+  });
+  console.log(this.getUId);
 });
 
 Template.home.helpers({
