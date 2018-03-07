@@ -1,5 +1,11 @@
-Template.admin.onCreated(function textOnCreated() {
+Template.home.onCreated(function homeOnCreated() {
   this.amKilling = new ReactiveVar(false);
+});
+
+Template.home.helpers({
+    killing() {
+        return Template.instance().amKilling.get();
+    }
 });
 
 Template.home.events({
@@ -20,8 +26,14 @@ Template.home.events({
         });
         return false;
     },
-    'click #kill-button': function(e, t) {
+    'click #kill-button': function(e, instance) {
         e.preventDefault();
         console.log("oh boy here I go killing again");
+        instance.amKilling.set(true);
+    },
+    'submit .kill-form': function(e, t) {
+        e.preventDefault();
+        var tokill = $('#kill-form').val()
+        console.log("kill ", toKill); 
     }
 });
