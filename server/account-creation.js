@@ -3,13 +3,12 @@ Accounts.onCreateUser(function(options, user) {
     user.profile = options.profile || {};
 
     // Assigns the first and last names to the newly created user object
-    user.profile.fullName = options.fullName;
-    user.profile.agentName = options.agentName;
+    user.fullName = options.fullName;
+    user.agentName = options.agentName;
+    user.kills = 0;
+    user.killCode = Random.id(8);
+    
 
-    // Basic Prof Picture Setup
-    //user.profile.profPicture = Meteor.absoluteUrl() + "img/default/user.jpg";
-    // Organization
-    //user.profile.organization = ["Org"];
     //Basic Role Set Up
     user.roles = ["User"];
 

@@ -7,12 +7,12 @@ Tracker.autorun(function() {
      FlowRouter.initialize();
   }
   if (!Meteor.userId()) {
-    if Session.get(‘loggedIn’) {
+    if (Session.get('loggedIn')) {
       //get and save the current route
       route = FlowRouter.current()
       Session.set('redirectAfterLogin', route.path);
       FlowRouter.go(FlowRouter.path('login'));
     }
   }
-}
+});
 
