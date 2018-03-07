@@ -14,7 +14,7 @@ Accounts.onCreateUser(function(options, user) {
     user.profile.agentName = options.agentName;
     user.profile.kills = 0;
     user.profile.killCode = Random.id(8);
-    user.profile.target = "";
+    user.profile.targetId = "";
 
     //Basic Role Set Up
     user.roles = ["User"];

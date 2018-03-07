@@ -1,19 +1,19 @@
 Template.home.onCreated(function homeOnCreated() {
   this.amKilling = new ReactiveVar(false);
-  /*
-  this.getUId = () => Meteor.user();
-
-  this.autorun(() => {
-    Meteor.subscribe('thisUser', this.getUId);
-  });
-  console.log(this.getUId);
-  */
 });
 
 Template.home.helpers({
     killing() {
         return Template.instance().amKilling.get();
+    },
+    target() {
+        return Meteor.users.findOne({
+          _id: Meteor.user().profile.targetId
+        }, {
+          fields: {fullName: 1 }
+        });
     }
+         
 });
 
 Template.home.events({
@@ -41,7 +41,19 @@ Template.home.events({
     },
    'click #finish-them': function(e, t) {
         e.preventDefault();
-        var tokill = $('#kill-code').val();
-        console.log("kill ", tokill); 
+        var killCode = $('#kill-code').val();
+        var id = Meteor.user().profile.target;
+        Meteor.call('users.attemptKill',
+          { id: id,
+          killCode: killCode }
+        , (err, res) => {
+          if (err) {
+            alert(err);
+          } else {
+            // success!
+          }
+        });
+
+        
     }
 });
