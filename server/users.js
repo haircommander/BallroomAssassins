@@ -10,9 +10,18 @@ const attemptKill = {
   // Factor out Method body so that it can be called independently (3)
   run({ id, killCode }) {
     let target = Meteor.users.findOne({_id: id});
-    if (killCode !== target.killCode) {
-        console.log(killCode, target.profile.killCode);
+    
+    if (killCode !== target.profile.killCode) {
+        throw new Meteor.Error('users.kills.wrongcode', "The user tried to kill with the incorrect code");
     }
+    Meteor.users.update({_id: id}, {
+        $set: { profile.alive: false}
+    });
+    Meteor.users.update(this.userId, {
+        $set: { profile.target: target.profile.target,
+                profile.kills: Meteor.user().kills + 1 }
+    });
+                
   },
   // Call Method by referencing the JS object (4)
   // Also, this lets us specify Meteor.apply options once in
