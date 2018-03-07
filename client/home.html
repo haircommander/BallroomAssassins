@@ -9,24 +9,22 @@
     <div class="ui vertical center aligned segment">
         <div class="row">
             <div class="four wide column"></div>
-            <div class="eight wide column middle aligned">
-                 <h3>You currently have {{profile.kills}} kills</h3>
-                 <h3> Your current target is {{profile.target}}</h3> 
-                 {{#if killing}}
-                 <form class="ui form" id="kill-form" >
-                     <div class="field">
-                         <div class="ui left icon input">
-                             <input type="text" id="kill-code" />
-                             <br>
-                             <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
-                         </div>
-                     </div>
-                 </form>
-                {{else}}
-                <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
-                {{/if}}
+                <div class="eight wide column middle aligned">
+        <h3>You currently have {{profile.kills}} kills</h3>
+        <h3> Your current target is {{profile.target}}</h3> 
+        {{#if killing}}
+        <form class="ui form" id="kill-form" action="action">
+            <div class="field">
+                <div class="ui left icon input">
+                    <input class="" type="text" placeholder="KillCode" id="kill-code" />
+                </div>
             </div>
-        </div>
+        </form>
+        {{/if}}
+        <button class="ui blue huge button" id="kill-button" type="submit">Finish Assassination</button>
+    </div>
+
+    </div>
     </div>
     {{/with}}
 </template>

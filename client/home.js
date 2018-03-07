@@ -38,9 +38,9 @@ Template.home.events({
         console.log("oh boy here I go killing again");
         instance.amKilling.set(true);
     },
-    'click #finish-them': function(e, t) {
+    'submit .kill-form': function(e, t) {
         e.preventDefault();
-        var tokill = $('#kill-code').val();
-        console.log("kill ", tokill); 
+        var tokill = $('#kill-form').val()
+        console.log("kill ", toKill); 
     }
 });
