@@ -5,9 +5,7 @@ Meteor.publish('userData', function() {
           _id: currentUser
         }, {
           fields: {
-            "fullName": 1,
-            "agentName": 1,
-            "kills": 1
+            "profile": 1
           }
         });
     } else {

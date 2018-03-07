@@ -2,10 +2,14 @@
     {{#with currentUser}}
     <div class="ui raised segment">
         <h1 class="ui header">
-            Welcome Back, Agent {{agentName}}
+            Welcome Back, Agent {{profile.agentName}}
             <button class="ui blue big button right floated" id="logout-button" type="submit">Logout</button>
         </h1>
-
+    </div>
+    <div class="ui vertical center aligned segment">
+        <h3>You currently have {{profile.kills}} kills</h3>
+        <h3> Your current target is {{target}}</h3> 
+        <button class="ui blue huge button" id="kill-button" type="submit">Finish Assassination</button>
     </div>
     {{/with}}
 </template>
