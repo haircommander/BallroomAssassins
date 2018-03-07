@@ -11,19 +11,28 @@
             <div class="four wide column"></div>
             <div class="eight wide column middle aligned">
                  <h3>You currently have {{profile.kills}} kills</h3>
-                 <h3> Your current target is {{profile.target}}</h3> 
-                 {{#if killing}}
-                 <form class="ui form" id="kill-form" >
-                     <div class="field">
-                         <div class="ui left icon input">
-                             <input type="text" id="kill-code" />
-                             <br>
-                             <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
+                 <h3> Your current target is {{profile.targetName}}</h3> 
+                 {{#if profile.alive}}
+                     {{#if killing}}
+                     <form class="ui form" id="kill-form" >
+                         <div class="field">
+                             <div class="ui left icon input">
+                                 <input type="text" id="kill-code" />
+                                 <br>
+                                 <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
+                             </div>
                          </div>
-                     </div>
-                 </form>
+                     </form>
+                    {{else}}
+                        {{#if dying}}
+                        <h3>Your kill code is <br>{{profile.killCode}}<br> please give it to your assassin to die with honor</h3>
+                        {{else}}
+                        <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
+                        <button class="ui blue huge button" id="die-button" type="submit">Die</button>
+                        {{/if}}
+                    {{/if}}
                 {{else}}
-                <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
+                <h3> I'm sorry, you're dead :( </h3>
                 {{/if}}
             </div>
         </div>

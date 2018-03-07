@@ -1,10 +1,14 @@
 Template.home.onCreated(function homeOnCreated() {
   this.amKilling = new ReactiveVar(false);
+  this.amDying = new ReactiveVar(false);
 });
 
 Template.home.helpers({
     killing() {
         return Template.instance().amKilling.get();
+    },
+    dying() {
+        return Template.instance().amDying.get();
     },
     target() {
         return Meteor.users.findOne({
@@ -36,13 +40,16 @@ Template.home.events({
     },
     'click #kill-button': function(e, instance) {
         e.preventDefault();
-        console.log("oh boy here I go killing again");
         instance.amKilling.set(true);
+    },
+    'click #die-button': function(e, instance) {
+        e.preventDefault();
+        instance.amDying.set(true);
     },
    'click #finish-them': function(e, t) {
         e.preventDefault();
         var killCode = $('#kill-code').val();
-        var id = Meteor.user().profile.target;
+        var id = Meteor.user().profile.targetId;
         Meteor.call('users.attemptKill',
           { id: id,
           killCode: killCode }

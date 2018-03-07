@@ -11,7 +11,6 @@ const attemptKill = {
   run({ id, killCode }) {
     let target = Meteor.users.findOne({_id: id});
     let current = Meteor.user(); 
-    console.log(target, current);
     if (killCode !== target.profile.killCode) {
         throw new Meteor.Error('users.kills.wrongcode', "The user tried to kill with the incorrect code");
     }
@@ -19,8 +18,9 @@ const attemptKill = {
     Meteor.users.update({_id: id}, {
         $set: { profile: target.profile}
     });
-    current.profile.target = target.profile.target;
+    current.profile.targetId = target.profile.targetId;
     current.profile.kills += 1;
+    current.profile.targetName = target.profile.targetName;
     Meteor.users.update(this.userId, {
         $set: { profile: current.profile}
     });
