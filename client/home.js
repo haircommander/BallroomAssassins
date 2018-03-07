@@ -1,12 +1,13 @@
-import { createUser } from '../server/user-info.js';
 Template.home.onCreated(function homeOnCreated() {
   this.amKilling = new ReactiveVar(false);
+  /*
   this.getUId = () => Meteor.user();
 
   this.autorun(() => {
     Meteor.subscribe('thisUser', this.getUId);
   });
   console.log(this.getUId);
+  */
 });
 
 Template.home.helpers({
@@ -38,9 +39,9 @@ Template.home.events({
         console.log("oh boy here I go killing again");
         instance.amKilling.set(true);
     },
-    'submit .kill-form': function(e, t) {
+   'click #finish-them': function(e, t) {
         e.preventDefault();
-        var tokill = $('#kill-form').val()
-        console.log("kill ", toKill); 
+        var tokill = $('#kill-code').val();
+        console.log("kill ", tokill); 
     }
 });
