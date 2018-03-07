@@ -1,10 +1,9 @@
-Template.admin.onCreated(function textOnCreated() {
-  this.amKilling = new ReactiveVar(false);
-});
-
-Template.home.events({
-    'click #logout-button': function(e, t) {
+Template.admin.events({
+    
+    'click #leggo-button': function(e, t) {
         e.preventDefault();
+        console.log("coming soon to a theater near you.");
+/*
         Meteor.logout(function(error) {
             if (error) {
                 return swal({
@@ -18,10 +17,7 @@ Template.home.events({
                 FlowRouter.go('/login');
             }
         });
-        return false;
-    },
-    'click #kill-button': function(e, t) {
-        e.preventDefault();
-        console.log("oh boy here I go killing again");
+  */
+        //return false;
     }
 });

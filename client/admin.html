@@ -1,15 +1,14 @@
-<template name="home">
+<template name="admin">
     {{#with currentUser}}
     <div class="ui raised segment">
         <h1 class="ui header">
-            Welcome Back, Agent {{profile.agentName}}
+            Welcome Back, Zaddy 😍😍😍 
             <button class="ui blue big button right floated" id="logout-button" type="submit">Logout</button>
         </h1>
     </div>
     <div class="ui vertical center aligned segment">
-        <h3>You currently have {{profile.kills}} kills</h3>
-        <h3> Your current target is {{profile.target}}</h3> 
-        <button class="ui blue huge button" id="kill-button" type="submit">Finish Assassination</button>
+        <p>There are currently numUsers playing the game (a different one than you just lost)</p>
+        <button class="ui blue huge button" id="leggo-button" type="submit">Click this big blue button to start the game!</button>
     </div>
     {{/with}}
 </template>
