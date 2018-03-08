@@ -59,19 +59,31 @@ Template.home.events({
     },
    'click #finish-them': function(e, t) {
         e.preventDefault();
+        var user = Meteor.user();
         var killCode = $('#kill-code').val();
-        var id = Meteor.user().targetId;
-        Meteor.call('users.attemptKill',
-          { id: id,
-          killCode: killCode }
-        , (err, res) => {
-          if (err) {
-            alert(err);
-          } else {
-            // success!
-            
-          }
-        });
+        var id = user.targetId;
+        if (user.targetName !== "" ) {
+            Meteor.call('users.attemptKill',
+              { id: id,
+              killCode: killCode }
+            , (err, res) => {
+              if (err) {
+                alert(err);
+              } else {
+                // success!
+                
+              }
+            });
+        }
+        else {
+            var err = swal({
+                title: "You do not have a target yet",
+                text: "Please wait for the game to start",
+                showConfirmButton: true,
+                type: "error"
+            });
+            return err;
+        }
 
         
     }
