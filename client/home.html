@@ -18,14 +18,15 @@
                          <div class="field">
                              <div class="ui left icon input">
                                  <input type="text" id="kill-code" />
-                                 <br>
-                                 <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
                              </div>
+                             <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
+                             <button class="ui blue huge button" id="false-alarm-kill"  type="submit">nvm</button>
                          </div>
                      </form>
                     {{else}}
                         {{#if dying}}
                         <h3>Your kill code is <br>{{killCode}}<br> please give it to your assassin to die with honor</h3>
+                        <button class="ui blue huge button" id="false-alarm-die"  type="submit">nvm</button>
                         {{else}}
                         <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
                         <button class="ui blue huge button" id="die-button" type="submit">Die</button>

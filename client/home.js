@@ -49,6 +49,14 @@ Template.home.events({
         e.preventDefault();
         instance.amDying.set(true);
     },
+    'click #false-alarm-kill': function(e, instance) {
+        e.preventDefault();
+        instance.amKilling.set(false);
+    },
+    'click #false-alarm-die': function(e, instance) {
+        e.preventDefault();
+        instance.amDying.set(false);
+    },
    'click #finish-them': function(e, t) {
         e.preventDefault();
         var killCode = $('#kill-code').val();
