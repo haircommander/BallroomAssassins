@@ -15,17 +15,12 @@ Template.home.helpers({
     killing() {
         return Template.instance().amKilling.get();
     },
+    pluralkill() {
+        return Meteor.user().kills !== 1;
+    },
     dying() {
         return Template.instance().amDying.get();
-    },
-    target() {
-        return Meteor.users.findOne({
-          _id: Meteor.user().targetId
-        }, {
-          fields: {fullName: 1 }
-        });
     }
-         
 });
 
 Template.home.events({
@@ -66,6 +61,7 @@ Template.home.events({
             alert(err);
           } else {
             // success!
+            
           }
         });
 
