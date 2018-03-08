@@ -17,7 +17,16 @@ Template.register.events({
         // Check password is at least 6 chars long
         var isValidPassword = function(pwd, pwd2) {
             if (pwd === pwd2) {
-                return pwd.length >= 6 ? true : false;
+                if (pwd.length < 6) {
+                    console.log("too short");
+                    return swal({
+                        title: "Password too short",
+                        text: "It must be at least 6 characters",
+                        showConfirmButton: true,
+                        type: "error"
+                    });
+                }
+                return true;
             } else {
                 return swal({
                     title: "Passwords don't match",
