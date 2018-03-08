@@ -48,16 +48,36 @@ Template.register.events({
             }, function(error) {
                 if (error) {
                     return swal({
-                    title: error.reason,
-                    text: "Please try again",
-                    showConfirmButton: true,
-                    type: "error"
-                });
+                        title: error.reason,
+                        text: "Please try again",
+                        showConfirmButton: true,
+                        type: "error"
+                    });
                 } else {
-                    FlowRouter.go('/');
+                    Meteor.call( 'sendVerificationLink', ( error, response ) => {
+                      if ( error ) {
+                        return swal({
+                            title: error.reason,
+                            text: "Please try again",
+                            showConfirmButton: true,
+                            type: "error"
+                        });
+                      } else {
+                        console.log("verification link sent!");
+                        FlowRouter.go('/');
+                      }
+                    });
                 }
             });
         }
+    /*
+        Meteor.call(
+          'sendEmail',
+          'Peter <peterjh@umich.edu>',
+          'umdbtassassins.gmail.com',
+          'Hello from Meteor!',
+          'This is a test of Email.send.'
+        );   */ 
 
         return false;
     }

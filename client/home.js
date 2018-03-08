@@ -24,6 +24,21 @@ Template.home.helpers({
 });
 
 Template.home.events({
+     'click .resend-verification-link' ( event, template ) {
+       Meteor.call( 'sendVerificationLink', ( error, response ) => {
+         if ( error ) {
+                return swal({
+                    title: "Error resending link!",
+                    text: "Sorry! There was an error resending link, try again!",
+                    timer: 1700,
+                    showConfirmButton: false,
+                    type: "error"
+                });
+         } else {
+           console.log("email sent success!");
+         }
+       });
+     },
     'click #logout-button': function(e, t) {
         e.preventDefault();
         Meteor.logout(function(error) {

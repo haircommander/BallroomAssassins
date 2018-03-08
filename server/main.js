@@ -1,5 +1,6 @@
 Meteor.startup(() => {
     try {
+        process.env.MAIL_URL='smtps://umbdtassassins:Quackstep1516@smtp.gmail.com:465'
         var id;
         id = Accounts.createUser({
             email: "fomeysurvant@gmail.com", 

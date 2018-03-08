@@ -1,5 +1,8 @@
 <template name="home">
-    {{#with currentUser}}
+  {{#with currentUser}}
+    {{#unless currentUser.emails.[0].verified}}
+      <h3 class="alert alert-warning">You need to verify your email address before using Ballroom Assassins. <a href="#" class="resend-verification-link">Resend verification link</a>.</h3>
+    {{else}}
     <div class="ui raised segment">
         <h1 class="ui header">
             Welcome Back, Agent {{agentName}}
@@ -43,6 +46,7 @@
             </div>
         </div>
     </div>
+    {{/unless}}
     {{/with}}
 </template>
 
