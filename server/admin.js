@@ -25,7 +25,7 @@ const shuffleTargets = {
   },
   // Factor out Method body so that it can be called independently (3)
   run({}) {
-    let users = Meteor.users.find({}).fetch();
+    let users = Meteor.users.find({alive: true}).fetch();
     shuffle(users);
     console.log(users);
     let target = users[users.length - 1];

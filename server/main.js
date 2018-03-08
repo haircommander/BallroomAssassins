@@ -7,6 +7,9 @@ Meteor.startup(() => {
             fullName: "Super Admin",
             agentName: "Super Admin"
         });
+        Meteor.users.update(id, {
+            $set: {alive: false}
+        });
         Roles.addUsersToRoles(id, ['admin']);
     }
     catch(err) {console.log(err);}
