@@ -10,13 +10,13 @@ Accounts.onCreateUser(function(options, user) {
     });
     */
     // Assigns the first and last names to the newly created user object
-    user.profile.fullName = options.fullName;
-    user.profile.agentName = options.agentName;
-    user.profile.kills = 0;
-    user.profile.killCode = Random.id(8);
-    user.profile.targetId = "";
-    user.profile.targetName = "";
-    user.profile.alive = true;
+    user.fullName = options.fullName;
+    user.agentName = options.agentName;
+    user.kills = 0;
+    user.killCode = Random.id(8);
+    user.targetId = "";
+    user.targetName = "";
+    user.alive = true;
 
     //Basic Role Set Up
     user.roles = ["User"];

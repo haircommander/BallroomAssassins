@@ -1,6 +1,14 @@
 Template.home.onCreated(function homeOnCreated() {
   this.amKilling = new ReactiveVar(false);
   this.amDying = new ReactiveVar(false);
+  Tracker.autorun(() => {
+    Meteor.subscribe('Meteor.users.agentName');
+    Meteor.subscribe('Meteor.users.alive');
+    Meteor.subscribe('Meteor.users.kills');
+    Meteor.subscribe('Meteor.users.targetName');
+    Meteor.subscribe('Meteor.users.targetId');
+    Meteor.subscribe('Meteor.users.killCode');
+  });
 });
 
 Template.home.helpers({
@@ -12,7 +20,7 @@ Template.home.helpers({
     },
     target() {
         return Meteor.users.findOne({
-          _id: Meteor.user().profile.targetId
+          _id: Meteor.user().targetId
         }, {
           fields: {fullName: 1 }
         });
@@ -49,7 +57,7 @@ Template.home.events({
    'click #finish-them': function(e, t) {
         e.preventDefault();
         var killCode = $('#kill-code').val();
-        var id = Meteor.user().profile.targetId;
+        var id = Meteor.user().targetId;
         Meteor.call('users.attemptKill',
           { id: id,
           killCode: killCode }

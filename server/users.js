@@ -10,20 +10,18 @@ const attemptKill = {
   // Factor out Method body so that it can be called independently (3)
   run({ id, killCode }) {
     let target = Meteor.users.findOne({_id: id});
-    let current = Meteor.user(); 
-    if (killCode !== target.profile.killCode) {
+    let user = Meteor.users.findOne({_id: this.userId});
+    if (killCode !== target.killCode) {
         throw new Meteor.Error('users.kills.wrongcode', "The user tried to kill with the incorrect code");
     }
-    target.profile.alive = false;
-    target.profile.target = false;
-    Meteor.users.update({_id: id}, {
-        $set: { profile: target.profile}
-    });
-    current.profile.targetId = target.profile.targetId;
-    current.profile.kills += 1;
-    current.profile.targetName = target.profile.targetName;
     Meteor.users.update(this.userId, {
-        $set: { profile: current.profile}
+        $set: {targetId: target.targetId,
+            kills: user.kills + 1,
+            targetName: target.targetName
+            }
+    });
+    Meteor.users.update({_id: id}, {
+        $set: {alive: false, targetId: "", targetName: ""}
     });
                 
   },

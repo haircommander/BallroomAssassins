@@ -4,8 +4,8 @@ Meteor.startup(() => {
         id = Accounts.createUser({
             email: "fomeysurvant@gmail.com", 
             password: "defnotadmin",
-            profile: { fullName: "Super Admin",
-                       agentName: "Super Admin" }
+            fullName: "Super Admin",
+            agentName: "Super Admin"
         });
         Roles.addUsersToRoles(id, ['admin']);
     }

@@ -1,11 +1,96 @@
-Meteor.publish('userData', function() {
+Meteor.publish('Meteor.users.fullName', function() {
     var currentUser = this.userId;
     if (currentUser) {
         return Meteor.users.find({
           _id: currentUser
         }, {
           fields: {
-            "profile": 1
+            "fullName": 1,
+          }
+        });
+    } else {
+        return this.ready();
+    }
+});
+Meteor.publish('Meteor.users.agentName', function() {
+    var currentUser = this.userId;
+    if (currentUser) {
+        return Meteor.users.find({
+          _id: currentUser
+        }, {
+          fields: {
+            "agentName": 1,
+          }
+        });
+    } else {
+        return this.ready();
+    }
+});
+Meteor.publish('Meteor.users.kills', function() {
+    var currentUser = this.userId;
+    if (currentUser) {
+        return Meteor.users.find({
+          _id: currentUser
+        }, {
+          fields: {
+            "kills": 1,
+          }
+        });
+    } else {
+        return this.ready();
+    }
+});
+Meteor.publish('Meteor.users.killCode', function() {
+    var currentUser = this.userId;
+    if (currentUser) {
+        return Meteor.users.find({
+          _id: currentUser
+        }, {
+          fields: {
+            "killCode": 1,
+          }
+        });
+    } else {
+        return this.ready();
+    }
+});
+Meteor.publish('Meteor.users.targetId', function() {
+    var currentUser = this.userId;
+    if (currentUser) {
+        return Meteor.users.find({
+          _id: currentUser
+        }, {
+          fields: {
+            "targetId": 1,
+          }
+        });
+    } else {
+        return this.ready();
+    }
+});
+
+Meteor.publish('Meteor.users.targetName', function() {
+    var currentUser = this.userId;
+    if (currentUser) {
+        return Meteor.users.find({
+          _id: currentUser
+        }, {
+          fields: {
+            "targetName": 1,
+          }
+        });
+    } else {
+        return this.ready();
+    }
+});
+Meteor.publish('Meteor.users.alive', function() {
+    var currentUser = this.userId;
+    if (currentUser) {
+        return Meteor.users.find({
+          _id: currentUser
+        }, {
+          fields: {
+            "alive": 1,
           }
         });
     } else {

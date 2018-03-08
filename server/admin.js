@@ -30,11 +30,9 @@ const shuffleTargets = {
     console.log(users);
     let target = users[users.length - 1];
     users.forEach(user => {
-        user.profile.targetId = target._id;
-        user.profile.targetName = target.profile.fullName;
-        
         Meteor.users.update({_id: user._id}, {
-            $set: { profile: user.profile}
+            $set: { targetId: target._id,
+                    targetName: target.fullName}
         });
         target = user;
     });

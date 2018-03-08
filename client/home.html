@@ -2,7 +2,7 @@
     {{#with currentUser}}
     <div class="ui raised segment">
         <h1 class="ui header">
-            Welcome Back, Agent {{profile.agentName}}
+            Welcome Back, Agent {{agentName}}
             <button class="ui blue big button right floated" id="logout-button" type="submit">Logout</button>
         </h1>
     </div>
@@ -10,9 +10,9 @@
         <div class="row">
             <div class="four wide column"></div>
             <div class="eight wide column middle aligned">
-                 {{#if profile.alive}}
-                     <h3>You currently have {{profile.kills}} kills</h3>
-                     <h3> Your current target is {{profile.targetName}}</h3> 
+                 {{#if alive}}
+                     <h3>You currently have {{kills}} kills</h3>
+                     <h3> Your current target is {{targetName}}</h3> 
                      {{#if killing}}
                      <form class="ui form" id="kill-form" >
                          <div class="field">
@@ -25,7 +25,7 @@
                      </form>
                     {{else}}
                         {{#if dying}}
-                        <h3>Your kill code is <br>{{profile.killCode}}<br> please give it to your assassin to die with honor</h3>
+                        <h3>Your kill code is <br>{{killCode}}<br> please give it to your assassin to die with honor</h3>
                         {{else}}
                         <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
                         <button class="ui blue huge button" id="die-button" type="submit">Die</button>
