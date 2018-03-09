@@ -6,6 +6,6 @@ Template.leaderboard.onCreated(function leaderboardOnCreated() {
 
 Template.leaderboard.helpers({
     users() {
-        return Meteor.users.find({roles: {$size: 1}}).fetch();
+        return Meteor.users.find({}).fetch();
     }
 });
