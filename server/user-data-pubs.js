@@ -12,6 +12,23 @@ Meteor.publish('Meteor.users.fullName', function() {
         return this.ready();
     }
 });
+
+Meteor.publish('Meteor.users.status', function() {
+    var currentUser = this.userId;
+    if (currentUser) {
+        return Meteor.users.find({
+          _id: currentUser
+        }, {
+          fields: {
+            "status": 1,
+            "killedby": 1
+          }
+        });
+    } else {
+        return this.ready();
+    }
+});
+
 Meteor.publish('Meteor.users.agentName', function() {
     var currentUser = this.userId;
     if (currentUser) {
