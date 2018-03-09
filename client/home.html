@@ -1,74 +1,58 @@
 <template name="home">
   {{#with currentUser}}
-    {{> homeheader }}
-    {{> homebody }}
-  {{/with}}
-</template>
-
-<template name="homeheader">
     <div class="ui raised segment">
         <h1 class="ui header">
             Welcome Back, Agent {{agentName}}
             <button class="ui blue big button right floated" id="logout-button" type="submit">Logout</button>
         </h1>
     </div>
-</template>
-
-<template name="homebody">
     <div class="ui vertical center aligned segment">
-        <div class="row">
-            <div class="four wide column"></div>
-            <div class="eight wide column middle aligned">
-            {{#unless currentUser.emails.[0].verified}}
-              <h3 class="alert alert-warning">You need to verify your email address before using Ballroom Assassins. <a href="#" class="resend-verification-link">Resend verification link</a>.</h3>
-            {{else}}
-                {{> verified}}
-            {{/unless}}
-                <h3> Review the rules <a href="{{pathFor 'rules'}}">here</a></h3>
+        <div class="ui stackable container grid">
+            <div class="row">
+                <div class="four wide column"></div>
+                <div class="eight wide column middle aligned">
+                    {{#unless currentUser.emails.[0].verified}}
+                      <h3 class="alert alert-warning">
+                        You need to verify your email address before using Ballroom Assassins. 
+                        <a href="#" class="resend-verification-link">Resend verification link</a>.
+                      </h3>
+                    {{else}}
+                     {{#if alive}}
+                        {{#if targetName}}
+                             <h3>You currently have {{kills}} kills</h3>
+                             <h3> Your current target is {{targetName}}</h3>
+                             {{#if killing}}
+                             <form class="ui form" id="kill-form" >
+                                 <div class="field">
+                                     <h3>Put your target's kill code here:</h3>
+                                     <div class="ui input">
+                                         <input class="" type="text" id="kill-code" />
+                                     </div> 
+                                     <br><br>
+                                     <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
+                                     <button class="ui blue huge button" id="false-alarm-kill"  type="submit">nvm</button>
+                                 </div>
+                             </form>
+                            {{else}}
+                                {{#if dying}}
+                                <h3>Your kill code is <br>{{killCode}}<br> please give it to your assassin to die with honor</h3>
+                                <button class="ui blue huge button" id="false-alarm-die"  type="submit">nvm</button>
+                                {{else}}
+                                <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
+                                <button class="ui blue huge button" id="die-button" type="submit">Die</button>
+                                {{/if}}
+                            {{/if}}
+                        {{else}}
+                        <h3>The game hasn't started yet!</h3>
+                        {{/if}}
+                    {{else}}
+                    <h3> I'm sorry, you're dead :( </h3>
+                    {{/if}}
+                    <h3> Review the rules <a href="{{pathFor 'rules'}}">here</a></h3>
+                    {{/unless}}
+                </div>
             </div>
         </div>
     </div>
-</template>
-
-<template name='verified'>
-    {{#if alive}}
-        {{> alive}}
-    {{else}}
-        <h3> I'm sorry, you're dead :( </h3>
-    {{/if}}
-</template>
-
-<template name="alive">
-    {{#if targetName}}
-         <h3>You currently have {{kills}} kills</h3>
-         <h3> Your current target is {{targetName}}</h3> 
-         {{#if killing}}
-            {{> killing}}
-        {{else}}
-            {{#if dying}}
-                {{> dying}}
-            {{else}}
-            <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
-            <button class="ui blue huge button" id="die-button" type="submit">Die</button>
-            {{/if}}
-        {{/if}}
-    {{else}}
-    <h3>The game hasn't started yet!</h3>
-    {{/if}}
-</template>
-
-<template name="killing">
-     <form class="ui form" id="kill-form" >
-         <div class="field">
-             <div class="ui left icon input">
-                 <input type="text" id="kill-code" />
-             </div>
-             <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
-             <button class="ui blue huge button" id="false-alarm-kill"  type="submit">nvm</button>
-         </div>
-     </form>
-</template>
-<template name="dying">
-    <h3>Your kill code is <br>{{killCode}}<br> please give it to your assassin to die with honor</h3>
-    <button class="ui blue huge button" id="false-alarm-die"  type="submit">nvm</button>
+  {{/with}}
 </template>
