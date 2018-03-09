@@ -12,7 +12,7 @@ const addAnnouncement = {
   run({ text }) {
     Announcements.insert({
         text: text,
-        time: new Date() 
+        date: moment().format() 
     });
   },
   // Call Method by referencing the JS object (4)

@@ -8,8 +8,9 @@ Template.announcements.onCreated(function announcementsOnCreated() {
 
 Template.announcements.helpers({
     announcements() {
-        announcements =  Announcements.find({}, {sort: {createdAt: -1}}).fetch();
-        console.log(announcements)
+        announcements =  Announcements.find({}, {sort: {date: -1}}).fetch();
+        
+        announcements.forEach( an => an["date"] = moment(an["date"]).fromNow() );
         return announcements;
     }
 });
