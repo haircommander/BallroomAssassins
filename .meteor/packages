@@ -38,3 +38,4 @@ reactive-var
 aldeed:simple-schema
 themeteorchef:bert
 momentjs:moment
+percolate:synced-cron

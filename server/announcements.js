@@ -46,3 +46,60 @@ Meteor.methods({
   }
 });
 
+
+SyncedCron.add({
+  name: "Send today's annoucements.",
+  schedule: function(parser) {
+    // parser is a later.parse object
+    // return parser.text('every 5 seconds');
+    //return parser.text('every 1 minutes');
+    return parser.text('at 12:30 am');
+  },
+  job: function(intendedAt) {
+    var today = moment().format();
+    var yesterday = moment().subtract(1, 'days').format();
+     
+    var todaysAnnouncements = Announcements.find({date: {$lt: today, $gt: yesterday} }, {sort: {date: 1}}).fetch()
+    var users = Meteor.users.find({"emails.verified": true}).fetch();
+    if (todaysAnnouncements.length !== 0) {
+        let announcements = "";
+        todaysAnnouncements.forEach(an => {
+            if (an.agentName === 'Admin') {
+                announcements += "The Game Director sent the following message:\n" + an.text + "\n";
+            } else {
+            announcements += "Agent " + an.agentName + " passed today. Here are their dying words:\n" + an.text + "\n";
+            }
+        });
+        users.forEach(user => {
+            let text = "Hello Agent " + user.agentName + ",\nAnother day has concluded. Here are some things that are happening:\n" + announcements;
+            if (!user.alive) {
+                text += "\nAs always: don't reveal the identity of any assassins, but help trap any target you wish.";
+            } else if (user.targetName.length !== 0) {
+                text += "\nAs always: stay alert, travel in groups, and be armed at all times.";
+                text += "Your current target is " + user.targetName + " and you have " + user.kills;
+                if (user.kills === 1) {text += " kill\n";}
+                else {text += " kills\n";}
+                text += "Good luck!"
+            } else {
+                text += "\nStay tuned for more information on your target.";
+            }
+            text += "\n--Ballroom Assassins Game Director";
+            Meteor.call('sendEmail',
+                user.emails[0].address,
+                'umbdtassassins.gmail.com',
+                "Ballroom Assassins Daily Debrief",
+                text
+            );            
+        });
+    }
+    
+  }
+});
+    /*
+        Meteor.call(
+          'sendEmail',
+          'Peter <peterjh@umich.edu>',
+          'umdbtassassins.gmail.com',
+          'Hello from Meteor!',
+          'This is a test of Email.send.'
+        );   */ 

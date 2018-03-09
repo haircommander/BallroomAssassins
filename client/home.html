@@ -1,69 +1,49 @@
 <template name="home">
   {{#with currentUser}}
-    <div class="ui raised segment">
-        <h1 class="ui header">
-            Welcome{{#if currentUser.emails.[0].verified}} Back{{/if}}, Agent {{agentName}}
-            <button class="ui blue big button right floated" id="logout-button" type="submit">Logout</button>
-        </h1>
-    </div>
-    <div class="ui vertical center aligned segment">
-        <div class="ui stackable container grid">
-            <div class="row">
-                <div class="four wide column">{{> announcements}}</div>
-                <div class="eight wide column">
-                    {{#unless currentUser.emails.[0].verified}}
-                      <h3 class="alert alert-warning">
-                        You need to verify your email address before using Ballroom Assassins. 
-                        <a href="#" class="resend-verification-link">Resend verification link</a>.
-                      </h3>
-                    {{else}}
-                     {{#if alive}}
-                        {{#if targetName}}
-                             <h2>You currently have {{kills}} kill{{#if pluralkill}}s{{/if}}
-                             <br>
-                             Your current target is {{targetName}}</h2>
-                             {{#if killing}}
-                             <form class="ui form" id="kill-form" >
-                                 <div class="field">
-                                     <h3>Put your target's kill code here:</h3>
-                                     <div class="ui input">
-                                         <input class="" type="text" id="kill-code" />
-                                     </div> 
-                                     <br><br>
-                                     <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
-                                     <button class="ui blue huge button" id="false-alarm-kill"  type="submit">nvm</button>
-                                 </div>
-                             </form>
-                            {{else}}
-                                {{#if dying}}
-                                <h3>Your kill code is <br>{{killCode}}<br> please give it to your assassin to die with honor</h3>
-                                <button class="ui blue huge button" id="false-alarm-die"  type="submit">nvm</button>
-                                {{else}}
-                                <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
-                                <button class="ui blue huge button" id="die-button" type="submit">Die</button>
-                                {{/if}}
-                            {{/if}}
-                        {{else}}
-                        <h3>The game hasn't started yet!</h3>
-                        {{/if}}
-                    {{else}}
-                    <h3> I'm sorry, you've been killed by Agent {{killedby}} :( </h3>
-                    {{#if status}}
-                         <h3>Submit your final words, story your demise, or plea for vengence (using only their agent name).</h3>
-                         <div class="ui input">
-                             <input class="" type="text" id="obituary" />
-                         </div> 
-                         <br><br>
-                         <button class="ui blue huge button" id="submit-obituary"  type="submit">Submit Obituary</button>
-                    {{/if}} 
-                    {{/if}}
-                    <h3>Review the rules <a href="{{pathFor 'rules'}}">here</a></h3>
-                    <h3>Contact the Game Director at umbdt-assassins@gmail.com</h3>
-                    {{/unless}}
-                </div>
-                <div class="four wide column">{{> leaderboard}}</div>
-            </div>
-        </div>
-    </div>
+  {{> homeheader}}
+  {{> homebody}}
   {{/with}}
+</template>
+<template name="homeheader">
+  <div class="ui raised segment">
+    <h1 class="ui header">
+      Welcome{{#if currentUser.emails.[0].verified}} Back{{/if}}, Agent {{agentName}}
+      <button class="ui blue big button right floated" id="logout-button" type="submit">Logout</button>
+    </h1>
+  </div>
+</template>
+
+<template name="homebody">
+  <div class="ui vertical center aligned segment">
+    <div class="ui stackable container grid">
+      <div class="row">
+        <div class="four wide column">{{> announcements}}</div>
+        <div class="eight wide column">
+          {{#unless currentUser.emails.[0].verified}}
+            {{> unverified}}
+          {{else}}
+            {{#if alive}}
+              {{> alive}}
+            {{else}}
+              {{> dead}}
+            {{/if}}
+            {{> footer}}
+          {{/unless}}
+        </div>
+        <div class="four wide column">{{> leaderboard}}</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="footer">
+  <h3>Review the rules <a href="{{pathFor 'rules'}}">here</a></h3>
+  <h3>Contact the Game Director at umbdt-assassins@gmail.com</h3>
+</template>
+
+<template name="unverified">
+  <h3 class="alert alert-warning">
+    You need to verify your email address before using Ballroom Assassins. 
+    <a href="#" class="resend-verification-link">Resend verification link</a>.
+  </h3>
 </template>

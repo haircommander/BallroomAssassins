@@ -1,0 +1,11 @@
+<template name="dead">
+  <h3> I'm sorry, you've been killed by Agent {{killedby}} :( </h3>
+  {{#if status}}
+     <h3>Submit your final words, story your demise, or plea for vengence (using only their agent name).</h3>
+     <div class="ui input">
+       <input class="" type="text" id="obituary" />
+     </div> 
+     <br><br>
+     <button class="ui blue huge button" id="submit-obituary"  type="submit">Submit Obituary</button>
+  {{/if}} 
+</template>

@@ -1,0 +1,30 @@
+<template name="alive">
+  {{#if targetName}}
+     <h2>You currently have {{kills}} kill{{#if pluralkill}}s{{/if}}
+     <br>
+     Your current target is {{targetName}}</h2>
+     {{#if killing}}
+     <form class="ui form" id="kill-form" >
+       <div class="field">
+         <h3>Put your target's kill code here:</h3>
+         <div class="ui input">
+           <input class="" type="text" id="kill-code" />
+         </div> 
+         <br><br>
+         <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
+         <button class="ui blue huge button" id="false-alarm-kill"  type="submit">nvm</button>
+       </div>
+     </form>
+    {{else}}
+      {{#if dying}}
+      <h3>Your kill code is <br>{{killCode}}<br> please give it to your assassin to die with honor</h3>
+      <button class="ui blue huge button" id="false-alarm-die"  type="submit">nvm</button>
+      {{else}}
+      <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
+      <button class="ui blue huge button" id="die-button" type="submit">Die</button>
+      {{/if}}
+    {{/if}}
+  {{else}}
+  <h3>The game hasn't started yet!</h3>
+  {{/if}}
+</template>

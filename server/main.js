@@ -14,5 +14,6 @@ Meteor.startup(() => {
         Roles.addUsersToRoles(id, ['admin']);
     }
     catch(err) {console.log(err);}
+    SyncedCron.start();
 });
 

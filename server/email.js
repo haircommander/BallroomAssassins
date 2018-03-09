@@ -39,3 +39,4 @@ Accounts.emailTemplates.verifyEmail = {
     return emailBody;
   }
 };
+
