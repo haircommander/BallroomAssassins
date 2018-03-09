@@ -9,7 +9,7 @@
     <div class="ui vertical center aligned segment">
         <div class="ui stackable container grid">
             <div class="row">
-                <div class="four wide column"></div>
+                <div class="four wide column">{{> announcements}}</div>
                 <div class="eight wide column middle aligned">
                     {{#unless currentUser.emails.[0].verified}}
                       <h3 class="alert alert-warning">

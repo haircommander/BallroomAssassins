@@ -27,15 +27,9 @@ Template.home.events({
      'click .resend-verification-link' ( event, template ) {
        Meteor.call( 'sendVerificationLink', ( error, response ) => {
          if ( error ) {
-                return swal({
-                    title: "Error resending link!",
-                    text: "Sorry! There was an error resending link, try again!",
-                    timer: 1700,
-                    showConfirmButton: false,
-                    type: "error"
-                });
+            Bert.alert("Error sending link", "warning");
          } else {
-           console.log("email sent success!");
+            Bert.alert("email sent success!", "success");
          }
        });
      },
@@ -83,20 +77,14 @@ Template.home.events({
               killCode: killCode }
             , (err, res) => {
               if (err) {
-                alert(err);
+                Bert.alert("You may have the wrong kill code!", "warning");
               } else {
-                // success!
-                
+                Bert.alert("Well done assassin, you now have your next assignment", "success");
               }
             });
         }
         else {
-            var err = swal({
-                title: "You do not have a target yet",
-                text: "Please wait for the game to start",
-                showConfirmButton: true,
-                type: "error"
-            });
+            Bert.alert("You do not have a target yet! Please wait for the game to start", "warning");
             return err;
         }
 

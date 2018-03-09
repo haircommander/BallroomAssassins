@@ -1,3 +1,4 @@
+
 Template.admin.events({
     
     'click #leggo-button': function(e, t) {
@@ -7,7 +8,7 @@ Template.admin.events({
           {}
         , (err, res) => {
           if (err) {
-            alert(err);
+            Bert.alert(err.reason, "danger");
           } else {
             // success!
           }
@@ -19,18 +20,25 @@ Template.admin.events({
         e.preventDefault();
         Meteor.logout(function(error) {
             if (error) {
-                return swal({
-                    title: "There was an error",
-                    text: "Sorry! There was an error logging out, try again!",
-                    timer: 1700,
-                    showConfirmButton: false,
-                    type: "error"
-                });
+                Bert.alert("there was an error!", "warning");
             } else {
                 FlowRouter.go('/login');
             }
         });
         return false;
+    },
+    'click #announce': function(e, t) {
+        e.preventDefault();
+        let text = $('#announcement').val();
+        console.log(text);
+        Meteor.call( 'addAnnouncement', {text}, ( error, response ) => {
+          if ( error ) {
+             Bert.alert(error.reason + "Error adding announcement!", "warning");
+          } else {
+             Bert.alert("Annoucement Sent!", "success");
+             $('#announcement').val("");
+          }
+        });
     }
 
 });

@@ -1,0 +1,21 @@
+<template name="announcements"> 
+  <h2>Announcements</h2>
+  <div class="ui feed">
+    {{#each announcements}}
+        {{> announcement}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="announcement">
+  <div class="event">
+    <div class="content">
+      <div class="date">
+        {{createdAt}}
+      </div>
+      <div class="summary">
+        {{text}}
+      </div>
+    </div>
+  </div>
+</template>

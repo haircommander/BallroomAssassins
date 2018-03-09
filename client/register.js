@@ -19,21 +19,12 @@ Template.register.events({
             if (pwd === pwd2) {
                 if (pwd.length < 6) {
                     console.log("too short");
-                    return swal({
-                        title: "Password too short",
-                        text: "It must be at least 6 characters",
-                        showConfirmButton: true,
-                        type: "error"
-                    });
+                    Bert.alert("Password must be at least 6 characters", "warning"); 
+                    return false;
                 }
                 return true;
             } else {
-                return swal({
-                    title: "Passwords don't match",
-                    text: "Please try again",
-                    showConfirmButton: true,
-                    type: "error"
-                });
+                Bert.alert("Passwords don't match!", "warning");
             }
         }
 
@@ -47,21 +38,11 @@ Template.register.events({
                 password: password
             }, function(error) {
                 if (error) {
-                    return swal({
-                        title: error.reason,
-                        text: "Please try again",
-                        showConfirmButton: true,
-                        type: "error"
-                    });
+                    Bert.alert(error.reason, "danger");
                 } else {
                     Meteor.call( 'sendVerificationLink', ( error, response ) => {
                       if ( error ) {
-                        return swal({
-                            title: error.reason,
-                            text: "Please try again",
-                            showConfirmButton: true,
-                            type: "error"
-                        });
+                        Bert.alert(error.reason, "danger");
                       } else {
                         console.log("verification link sent!");
                         FlowRouter.go('/');
