@@ -31,7 +31,7 @@ Template.admin.events({
         e.preventDefault();
         let text = $('#announcement').val();
         console.log(text);
-        Meteor.call( 'addAnnouncement', {text}, ( error, response ) => {
+        Meteor.call( 'addAnnouncement', {text: text, agentName: "Admin"}, ( error, response ) => {
           if ( error ) {
              Bert.alert(error.reason + "Error adding announcement!", "warning");
           } else {

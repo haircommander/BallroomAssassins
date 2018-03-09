@@ -79,6 +79,7 @@ Template.home.events({
               if (err) {
                 Bert.alert("You may have the wrong kill code!", "warning");
               } else {
+                instance.amKilling.set(false);
                 Bert.alert("Well done assassin, you now have your next assignment", "success");
               }
             });

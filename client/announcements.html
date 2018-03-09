@@ -1,6 +1,6 @@
 <template name="announcements"> 
-  <h2>Announcements</h2>
-  <div class="ui feed">
+  <h2>Announcements:</h2>
+  <div class="ui feed middle aligned">
     {{#each announcements}}
         {{> announcement}}
     {{/each}}
@@ -8,16 +8,18 @@
 </template>
 
 <template name="announcement">
-  <div class="middle aligned">
   <div class="event">
-    <div class="content">
-      <div class="date">
-        {{date}}
-      </div>
+    <div class="content horizontal center aligned">
       <div class="summary">
+        Message from {{agentName}}
+        <div class="date">
+          {{date}}
+        </div>
+      </div>
+      <div class="extra text">
         {{text}}
       </div>
     </div>
   </div>
-  </div>
+  <br>
 </template>

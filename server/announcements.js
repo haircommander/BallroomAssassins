@@ -5,14 +5,16 @@ const addAnnouncement = {
   // Factor out validation so that it can be run independently (1)
   validate(args) {
     new SimpleSchema({
-      text: {type: String}
+      text: {type: String},
+      agentName: {type: String}
     }).validate(args)
   },
   // Factor out Method body so that it can be called independently (3)
-  run({ text }) {
+  run({ text, agentName }) {
     Announcements.insert({
         text: text,
-        date: moment().format() 
+        date: moment().format(),
+        agentName: agentName
     });
   },
   // Call Method by referencing the JS object (4)
