@@ -2,7 +2,7 @@
   {{#with currentUser}}
     <div class="ui raised segment">
         <h1 class="ui header">
-            Welcome Back, Agent {{agentName}}
+            Welcome{{#if currentUser.emails.[0].verified}} Back{{/if}}, Agent {{agentName}}
             <button class="ui blue big button right floated" id="logout-button" type="submit">Logout</button>
         </h1>
     </div>
@@ -19,8 +19,9 @@
                     {{else}}
                      {{#if alive}}
                         {{#if targetName}}
-                             <h3>You currently have {{kills}} kills</h3>
-                             <h3> Your current target is {{targetName}}</h3>
+                             <h3>You currently have {{kills}} kills
+                             <br>
+                             Your current target is {{targetName}}</h3>
                              {{#if killing}}
                              <form class="ui form" id="kill-form" >
                                  <div class="field">
