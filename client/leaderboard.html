@@ -1,0 +1,27 @@
+<template name="leaderboard">
+    <h2>Leaderboard:</h2>
+    <div class="ui middle aligned divided list">
+    <div class="item">
+      <div class="right floated content">
+        <h3>Kills</h3>
+      </div>
+      <div class="left floated content">
+        <h3>Agent Name</h3>
+      </div>
+    </div>
+    {{#each users}}
+        {{> player}}
+    {{/each}}
+    </div>
+</template>
+
+<template name="player">
+    <div style="background-color:{{#if alive}}#90EE90{{else}}#FFB6C1{{/if}}" class="item">
+      <div class="right floated content">
+        <h4>{{kills}}&nbsp;</h4>
+      </div>
+      <div class="left floated content">
+        <h4>&nbsp;{{agentName}}</h4>
+      </div>
+    </div>
+</template>

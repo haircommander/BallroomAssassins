@@ -19,9 +19,9 @@
                     {{else}}
                      {{#if alive}}
                         {{#if targetName}}
-                             <h3>You currently have {{kills}} kills
+                             <h2>You currently have {{kills}} kills
                              <br>
-                             Your current target is {{targetName}}</h3>
+                             Your current target is {{targetName}}</h2>
                              {{#if killing}}
                              <form class="ui form" id="kill-form" >
                                  <div class="field">
@@ -52,6 +52,8 @@
                     <h3> Review the rules <a href="{{pathFor 'rules'}}">here</a></h3>
                     {{/unless}}
                 </div>
+                <div class="four wide column">{{> leaderboard}}</div>
+
             </div>
         </div>
     </div>

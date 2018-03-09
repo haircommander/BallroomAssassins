@@ -97,3 +97,12 @@ Meteor.publish('Meteor.users.alive', function() {
         return this.ready();
     }
 });
+
+
+Meteor.publish('Meteor.users.leaderboard', function() {
+    if (this.userId) {
+      return Meteor.users.find({}, {sort: {kills: -1, fullName: -1}, fields: {agentName: 1, kills: 1, alive: 1}});
+    } else {
+        return this.ready();
+    }
+});
