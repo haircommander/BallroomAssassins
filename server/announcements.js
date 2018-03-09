@@ -11,7 +11,8 @@ const addAnnouncement = {
   // Factor out Method body so that it can be called independently (3)
   run({ text }) {
     Announcements.insert({
-        text: text
+        text: text,
+        time: new Date() 
     });
   },
   // Call Method by referencing the JS object (4)

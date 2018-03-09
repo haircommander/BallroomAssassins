@@ -8,7 +8,9 @@ Template.announcements.onCreated(function announcementsOnCreated() {
 
 Template.announcements.helpers({
     announcements() {
-        return Announcements.find({}, {sort: {createdAt: -1}}).fetch();
+        announcements =  Announcements.find({}, {sort: {createdAt: -1}}).fetch();
+        console.log(announcements)
+        return announcements;
     }
 });
 
