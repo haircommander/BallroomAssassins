@@ -76,17 +76,17 @@ const sendAnnoucement = {
             }
         });
         users.forEach(user => {
-            let text = "Hello Agent " + user.agentName + ",\nAnother day has concluded. Here are some things that are happening:\n" + announcements;
+            let text = "Hello Agent " + user.agentName + ",\n\nAnother day has concluded. Here are some things that are happening:\n" + announcements;
             if (!user.alive) {
-                text += "\nAs always: don't reveal the identity of any assassins, but help trap any target you wish.";
+                text += "\n\nAs always: don't reveal the identity of any assassins, but help trap any target you wish.";
             } else if (user.targetName.length !== 0) {
-                text += "\nAs always: stay alert, travel in groups, and be armed at all times.";
+                text += "\n\nAs always: stay alert, travel in groups, and be armed at all times.";
                 text += "Your current target is " + user.targetName + " and you have " + user.kills;
-                if (user.kills === 1) {text += " kill\n";}
-                else {text += " kills\n";}
+                if (user.kills === 1) {text += " kill.\n";}
+                else {text += " kills.\n";}
                 text += "Good luck!"
             } else {
-                text += "\nStay tuned for more information on your target.";
+                text += "\n\nStay tuned for more information on your target.";
             }
             text += "\n--Ballroom Assassins Game Director";
             Meteor.call('sendEmail',
