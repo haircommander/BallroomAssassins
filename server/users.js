@@ -9,6 +9,7 @@ const attemptKill = {
   },
   // Factor out Method body so that it can be called independently (3)
   run({ id, killCode }) {
+    console.log("called");
     let target = Meteor.users.findOne({_id: id});
     let user = Meteor.users.findOne({_id: this.userId});
     if (killCode !== target.killCode) {

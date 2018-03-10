@@ -3,6 +3,7 @@ Template.alive.onCreated(function aliveOnCreated() {
   this.amDying = new ReactiveVar(false);
   Tracker.autorun(() => {
     Meteor.subscribe('Meteor.users.agentName');
+    Meteor.subscribe('Meteor.users.targetId');
     Meteor.subscribe('Meteor.users.kills');
     Meteor.subscribe('Meteor.users.targetName');
     Meteor.subscribe('Meteor.users.killCode');
@@ -39,23 +40,6 @@ Template.alive.events({
         e.preventDefault();
         instance.amDying.set(false);
     },
-    'click #submit-obituary': function(e, t) {
-        e.preventDefault();
-        var user = Meteor.user();
-        var obituary = $('#obituary').val();
-        var id = user.targetId;
-        Meteor.call('addAnnouncement',
-          { text: obituary,
-          agentName: user.agentName }
-        , (err, res) => {
-          if (err) {
-            Bert.alert("Error adding annoucement", "warning");
-          } else {
-            Meteor.call('users.finishObituary', {}, (err, res) => {if (err) {console.log(err);}}); 
-            Bert.alert("Thanks for your obituary", "success");
-          }
-        });
-    },
     'click #finish-them': function(e, t) {
         e.preventDefault();
         var user = Meteor.user();
@@ -67,6 +51,7 @@ Template.alive.events({
               killCode: killCode }
             , (err, res) => {
               if (err) {
+                console.log(err);
                 Bert.alert("You may have the wrong kill code!", "warning");
               } else {
                 t.amKilling.set(false);
