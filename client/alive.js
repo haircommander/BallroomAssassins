@@ -63,5 +63,20 @@ Template.alive.events({
             Bert.alert("You do not have a target yet! Please wait for the game to start", "warning");
             return err;
         }
+    },
+    'click #change-kill-code': function(e, t) {
+        e.preventDefault();
+        var user = Meteor.user();
+        var killCode = $('#kill-code-input').val();
+        Meteor.call('users.changeKillCode',
+          {killCode: killCode }
+        , (err, res) => {
+          if (err) {
+            console.log(err);
+            Bert.alert("Error in changing kill code!", "warning");
+          } else {
+            Bert.alert("Kill code successfully changed!", "success");
+          }
+        });
     }
 });
