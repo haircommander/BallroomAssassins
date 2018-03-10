@@ -70,9 +70,9 @@ const sendAnnoucement = {
         let announcements = "";
         todaysAnnouncements.forEach(an => {
             if (an.agentName === 'Admin') {
-                announcements += "The Game Director sent the following message:\n" + an.text + "\n";
+                announcements += "The Game Director sent the following message:\n" + an.text + "\n\n";
             } else {
-            announcements += "Agent " + an.agentName + " passed today. Here are their dying words:\n" + an.text + "\n";
+            announcements += "Agent " + an.agentName + " passed today. Here are their dying words:\n" + an.text + "\n\n";
             }
         });
         users.forEach(user => {
