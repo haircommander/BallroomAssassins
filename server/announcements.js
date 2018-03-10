@@ -39,14 +39,8 @@ Meteor.publish('announcements.all', function() {
 });
 
 // Actually register the method with Meteor's DDP system
-Meteor.methods({
-  [addAnnouncement.name]: function (args) {
-    addAnnouncement.validate.call(this, args);
-    addAnnouncement.run.call(this, args);
-  }
-});
 
-
+/*
 SyncedCron.add({
   name: "Send today's annoucements.",
   schedule: function(parser) {
@@ -56,6 +50,17 @@ SyncedCron.add({
     return parser.text('at 12:30 am');
   },
   job: function(intendedAt) {
+*/
+const sendAnnoucement = {
+  name: 'sendAnnouncement',
+  // Factor out validation so that it can be run independently (1)
+  validate(args) {
+   if (!Roles.userIsInRole(Meteor.user(), [ 'admin' ])) {
+    throw new Meteor.Error("that's not allowed");
+   }
+  },
+  // Factor out Method body so that it can be called independently (3)
+  run({ text, agentName }) {
     var today = moment().format();
     var yesterday = moment().subtract(1, 'days').format();
      
@@ -92,14 +97,24 @@ SyncedCron.add({
             );            
         });
     }
+  },
+  call(args, callback) {
+    const options = {
+      returnStubValue: true,     // (5)
+      throwStubExceptions: true  // (6)
+    }
+    Meteor.apply(this.name, [args], options, callback);
+  }
+};
     
+Meteor.methods({
+  [addAnnouncement.name]: function (args) {
+    addAnnouncement.validate.call(this, args);
+    addAnnouncement.run.call(this, args);
+  },
+  [sendAnnoucement.name]: function (args) {
+    sendAnnoucement.validate.call(this, args);
+    sendAnnoucement.run.call(this, args);
   }
 });
-    /*
-        Meteor.call(
-          'sendEmail',
-          'Peter <peterjh@umich.edu>',
-          'umdbtassassins.gmail.com',
-          'Hello from Meteor!',
-          'This is a test of Email.send.'
-        );   */ 
+
