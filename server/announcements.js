@@ -86,8 +86,8 @@ SyncedCron.add({
             text += "\n--Ballroom Assassins Game Director";
             Meteor.call('sendEmail',
                 user.emails[0].address,
-                'umbdtassassins.gmail.com',
-                "Ballroom Assassins Daily Debrief",
+                'Ballroom Assassins Admin',
+                "[Ballroom Assassins] Daily Debrief",
                 text
             );            
         });
