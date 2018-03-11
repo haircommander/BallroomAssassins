@@ -40,3 +40,16 @@ Accounts.emailTemplates.verifyEmail = {
   }
 };
 
+Accounts.emailTemplates.resetPassword = {
+  subject() {
+    return "[Ballroom Assassins] Reset Your Password";
+  },
+  text( user, url ) {
+    let emailAddress   = user.emails[0].address,
+        urlWithoutHash = url.replace( '#/', '' ),
+        supportEmail   = "umbdt-assassins@gmail.com",
+        emailBody      = `To reset your password for your account (${emailAddress}) visit the following link:\n\n${urlWithoutHash}\n\n If you did not request this reset, please ignore this email. If you feel something is wrong, please contact our support team: ${supportEmail}.`;
+
+    return emailBody;
+  }
+};
