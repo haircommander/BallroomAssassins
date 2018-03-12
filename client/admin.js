@@ -1,17 +1,3 @@
-const Kills = new Mongo.Collection('kills');
-
-Template.admin.onCreated(function adminOnCreated() {
-  Tracker.autorun(() => {
-    Meteor.subscribe('kills.get');
-  });
-});
-
-Template.admin.helpers({
-    kills() {
-        return Kills.find({});
-    }
-});
-
 Template.admin.events({
     'click #broadcast': function(e, t) {
         e.preventDefault();
@@ -62,16 +48,5 @@ Template.admin.events({
              $('#announcement').val("");
           }
         });
-    },
-    'click #undo': function(e, t) {
-        e.preventDefault();
-        Meteor.call("kills.undoKill", {id: e.target.parentNode.id}, (error, response) => {
-          if ( error) {
-            Bert.alert(error.reason + "Error removing kill", "warning");
-          } else {
-            Bert.alert("Kill undone!", "success"); 
-          }
-        });
     }
-
 });

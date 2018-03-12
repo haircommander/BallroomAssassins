@@ -1,8 +1,8 @@
 const Kills = new Mongo.Collection('kills');
 
 Meteor.publish('kills.get', function() {
-    if (!Roles.userIsInRole(Meteor.user(), [ 'admin' ])) {
-     throw new Meteor.Error("admin.wrong", "You're not allowed to do this");
+    if (!Roles.userIsInRole(Meteor.user(), [ 'gamemanager' ])) {
+     throw new Meteor.Error("gamemanager.wrong", "You're not allowed to do this");
     };
     return Kills.find({});
 });
@@ -19,7 +19,7 @@ const addKill = {
   },
   // Factor out Method body so that it can be called independently (3)
   run({ assFullName, assId, targetFullName, targetId }) {
-    Kills.insert({assFullName: assFullName, assId: assId, targetFullName: targetFullName, targetId: targetId});
+    Kills.insert({assFullName: assFullName, assId: assId, targetFullName: targetFullName, targetId: targetId, createdAt: moment().format()});
   },
   // Call Method by referencing the JS object (4)
   // Also, this lets us specify Meteor.apply options once in
@@ -46,6 +46,7 @@ const undoKill = {
   run({ id }) {
     //Kills.remove({_id: id});
     let kill = Kills.findOne(id);
+    console.log(kill);
     console.log(kill.assId, kill.targetId);
     Meteor.call("users.undoKill", {assId: kill.assId, targetId: kill.targetId}, (error, response) => {
         if (error) {

@@ -85,12 +85,38 @@ const undoKill = {
         Meteor.users.update(targetId, {
             $set: {alive: true, targetId: ass.targetId, targetName: ass.targetName, status: "", killedby: ""}
         });
+        target = Meteor.users.findOne({_id: targetId});
         Meteor.users.update(assId, {
             $set: {targetId: target._id,
                 kills: ass.kills - 1,
                 targetName: target.fullName
                 }
         });
+        ass = Meteor.users.findOne({_id: assId});
+ 
+        let text = "Hello Agent " + target.agentName + "\n\n";
+        text += "Your friendly neighborhood Game Director here, letting you know you know a dispute ended in your favor and you are back in the game!\n";
+        text += "Your target is " + target.targetName + " and you have " + target.kills + " kill";
+        if (target.kills !== 1) {text += 's';}
+        text += ".\n\nUse your good fortune wisely, and play safe out there!\n--Assassins Game Director";
+        Meteor.call('sendEmail',
+            target.emails[0].address,
+            'Ballroom Assassins Game Director',
+            "[Ballroom Assassins] Dispute Result",
+            text
+        );            
+    
+        text = "Hello Agent " + ass.agentName + "\n\n";
+        text += "Your friendly neighborhood Game Director here, letting you know a dispute ended against your favor and your old target is back in the game.\n";
+        text += "Your target is " + ass.targetName + " and you have " + ass.kills + " kill";
+        if (ass.kills !== 1) {text += 's';}
+        text += ".\n\nHopefully you get them next time!\n--Assassins Game Director";
+        Meteor.call('sendEmail',
+            ass.emails[0].address,
+            'Ballroom Assassins Game Director',
+            "[Ballroom Assassins] Dispute Result",
+            text
+        );            
     } else {
         throw new Meteor.Error("problem in users.undoKill");
     }

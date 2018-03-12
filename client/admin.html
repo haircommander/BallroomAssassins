@@ -7,7 +7,6 @@
         </h1>
     </div>
     <div class="ui vertical center aligned segment">
-        <p>There are currently numUsers playing the game (a different one than you just lost)</p>
         <button class="ui blue huge button" id="broadcast" type="submit">Email Annoucements</button>
         <br><br>
         <div class="ui form" id="register-form" action="action">
@@ -21,15 +20,8 @@
                     <button class="ui blue huge button" id="announce"  type="submit">Send Announcement</button>
                 </div>
         </div>
-        <br><br>
-        <div>
-        {{#each k in kills}}
-        <div id={{k._id}}>
-        {{k.assFullName}}&nbsp;{{k.assAgentName}}&nbsp;{{k.targetFullName}}&nbsp;{{k.targetAgentName}}&nbsp;
-        <button class="ui blue small button" id="undo"  type="submit">Undo</button>
-        </div>
-        {{/each}}
-        </div>
+        <br>
+        <br>
         <br>
         <br>
         <br>
