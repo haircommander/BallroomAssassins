@@ -88,7 +88,7 @@ const sendAnnoucement = {
             } else {
                 text += "\n\nStay tuned for more information on your target.";
             }
-            text += "\n--Ballroom Assassins Game Director";
+            text += "\n--Ballroom Assassins Admin";
             Meteor.call('sendEmail',
                 user.emails[0].address,
                 'Ballroom Assassins Admin',
