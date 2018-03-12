@@ -70,7 +70,7 @@ const sendAnnoucement = {
         let announcements = "";
         todaysAnnouncements.forEach(an => {
             if (an.agentName === 'Admin') {
-                announcements += "The Game Director sent the following message:\n" + an.text + "\n\n";
+                announcements += "The Assassins Admin sent the following message:\n" + an.text + "\n\n";
             } else {
             announcements += "Agent " + an.agentName + " passed today. Here are their dying words:\n" + an.text + "\n\n";
             }
@@ -84,7 +84,7 @@ const sendAnnoucement = {
                 text += "Your current target is " + user.targetName + " and you have " + user.kills;
                 if (user.kills === 1) {text += " kill.\n";}
                 else {text += " kills.\n";}
-                text += "Good luck!"
+                text += "Visit ballroom-assassins.herokuapp.com for more information.\nGood luck!"
             } else {
                 text += "\n\nStay tuned for more information on your target.";
             }

@@ -1,19 +1,19 @@
 const Kills = new Mongo.Collection('kills');
 
-Template.gamemanager.onCreated(function gamemanagerOnCreated() {
+Template.gamedirector.onCreated(function gamedirectorOnCreated() {
   Tracker.autorun(() => {
     Meteor.subscribe('kills.get');
   });
 });
 
-Template.gamemanager.helpers({
+Template.gamedirector.helpers({
     kills() {
         return Kills.find({}, {sort: {createdAt: -1}});
     }
 });
 
 
-Template.gamemanager.events({
+Template.gamedirector.events({
     'click #the-logout-button': function(e, t) {
         e.preventDefault();
         console.log("clicked!");

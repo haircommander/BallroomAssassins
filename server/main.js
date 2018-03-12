@@ -11,7 +11,7 @@ Meteor.startup(() => {
         Meteor.users.update(id, {
             $set: {alive: false}
         });
-        Roles.addUsersToRoles(id, ['gamemanager']);
+        Roles.addUsersToRoles(id, ['gamedirector']);
     } catch (err){}
     try {
         var id;

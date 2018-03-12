@@ -1,8 +1,8 @@
 const Kills = new Mongo.Collection('kills');
 
 Meteor.publish('kills.get', function() {
-    if (!Roles.userIsInRole(Meteor.user(), [ 'gamemanager' ])) {
-     throw new Meteor.Error("gamemanager.wrong", "You're not allowed to do this");
+    if (!Roles.userIsInRole(Meteor.user(), [ 'gamedirector' ])) {
+     throw new Meteor.Error("gamedirector.wrong", "You're not allowed to do this");
     };
     return Kills.find({});
 });

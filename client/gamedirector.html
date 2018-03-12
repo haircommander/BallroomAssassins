@@ -1,0 +1,32 @@
+<template name="gamedirector">
+    <div class="ui raised segment">
+        <h1 class="ui header">
+            Welcome Back, GM 😍😍😍 
+            <button class="ui blue big button right floated" id="the-logout-button" type="submit">Logout</button>
+        </h1>
+    </div>
+  <div class="ui vertical center aligned segment">
+    <div class="ui stackable container grid">
+      <div class="row">
+        <div class="sixteen wide column">
+        <table class="ui celled table">
+        <thead>
+        <tr>
+          <th>Assassin Name</th>
+          <th>Target Name</th>
+          <th>Undo Kill</th>
+        </tr>
+        </thead>
+        {{#each k in kills}}
+        <tr>
+          <td>{{k.assFullName}}</td>
+          <td>{{k.targetFullName}}</td>
+          <td id="{{k._id}}"><button class="ui blue small button" id="undo"  type="submit">Undo</button></td>
+        </tr>
+        {{/each}}
+        </table>
+        </div> 
+      </div>
+    </div>
+  </div>
+</template>

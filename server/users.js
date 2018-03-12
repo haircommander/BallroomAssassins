@@ -98,7 +98,8 @@ const undoKill = {
         text += "Your friendly neighborhood Game Director here, letting you know you know a dispute ended in your favor and you are back in the game!\n";
         text += "Your target is " + target.targetName + " and you have " + target.kills + " kill";
         if (target.kills !== 1) {text += 's';}
-        text += ".\n\nUse your good fortune wisely, and play safe out there!\n--Assassins Game Director";
+        text += ".\n\nUse your good fortune wisely, and play safe out there!\n";
+        text += "Visit ballroom-assassins.herokuapp.com for more information.\nGood luck!\n\n--Assassins Game Director";
         Meteor.call('sendEmail',
             target.emails[0].address,
             'Ballroom Assassins Game Director',
@@ -110,7 +111,8 @@ const undoKill = {
         text += "Your friendly neighborhood Game Director here, letting you know a dispute ended against your favor and your old target is back in the game.\n";
         text += "Your target is " + ass.targetName + " and you have " + ass.kills + " kill";
         if (ass.kills !== 1) {text += 's';}
-        text += ".\n\nHopefully you get them next time!\n--Assassins Game Director";
+        text += ".\n\nHopefully you get them next time!\n"
+        text += "Visit ballroom-assassins.herokuapp.com for more information.\nGood luck!\n\n--Assassins Game Director";
         Meteor.call('sendEmail',
             ass.emails[0].address,
             'Ballroom Assassins Game Director',
