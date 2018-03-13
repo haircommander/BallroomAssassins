@@ -16,7 +16,6 @@ Template.gamedirector.helpers({
 Template.gamedirector.events({
     'click #the-logout-button': function(e, t) {
         e.preventDefault();
-        console.log("clicked!");
         Meteor.logout(function(error) {
             if (error) {
                 Bert.alert("there was an error!", "warning");
@@ -28,11 +27,14 @@ Template.gamedirector.events({
     },
     'click #undo': function(e, t) {
         e.preventDefault();
+        t.$(':input[type="submit"]').prop('disabled', true);
         Meteor.call("kills.undoKill", {id: e.target.parentNode.id}, (error, response) => {
           if ( error) {
             Bert.alert(error.reason + "Error removing kill", "warning");
+            t.$(':input[type="submit"]').prop('disabled', false);
           } else {
             Bert.alert("Kill undone!", "success"); 
+            t.$(':input[type="submit"]').prop('disabled', false);
           }
         });
     }

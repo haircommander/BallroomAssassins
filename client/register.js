@@ -18,7 +18,6 @@ Template.register.events({
         var isValidPassword = function(pwd, pwd2) {
             if (pwd === pwd2) {
                 if (pwd.length < 6) {
-                    console.log("too short");
                     Bert.alert("Password must be at least 6 characters", "warning"); 
                     return false;
                 }
@@ -44,7 +43,7 @@ Template.register.events({
                       if ( error ) {
                         Bert.alert(error.reason, "danger");
                       } else {
-                        console.log("verification link sent!");
+                        Bert.alert("verification link sent!", "success");
                         FlowRouter.go('/');
                       }
                     });

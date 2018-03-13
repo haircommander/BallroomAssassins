@@ -46,11 +46,9 @@ const undoKill = {
   run({ id }) {
     //Kills.remove({_id: id});
     let kill = Kills.findOne(id);
-    console.log(kill);
-    console.log(kill.assId, kill.targetId);
     Meteor.call("users.undoKill", {assId: kill.assId, targetId: kill.targetId}, (error, response) => {
         if (error) {
-            console.log(error, "undo Kill error");
+            throw new Meteor.error("undo Kill error");
         } else {
             Kills.remove(id);
         }

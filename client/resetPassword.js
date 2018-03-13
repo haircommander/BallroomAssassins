@@ -2,7 +2,6 @@ Template.resetPassword.onCreated(function() {
   //if (Accounts._resetPasswordToken) {
     var resetPassword = FlowRouter.getParam('token');
     Session.set('resetPassword', resetPassword);
-    console.log('ResetPasswordtemplate : ' + resetPassword);
   //}
 });
 
@@ -23,7 +22,6 @@ Template.resetPassword.events({
     var isValidPassword = function(pwd, pwd2) {
         if (pwd === pwd2) {
             if (pwd.length < 6) {
-                console.log("too short");
                 Bert.alert("Password must be at least 6 characters", "warning"); 
                 return false;
             }

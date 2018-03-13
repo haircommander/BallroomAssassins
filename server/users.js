@@ -12,7 +12,7 @@ const attemptKill = {
     let target = Meteor.users.findOne({_id: id});
     let user = Meteor.users.findOne({_id: this.userId});
     if (killCode !== target.killCode) {
-        throw new Meteor.Error('users.kills.wrongcode', "The user tried to kill with the incorrect code");
+        throw new Meteor.Error('users.kills.wrongcode', "Wrong kill code!");
     }
     Meteor.call('kills.addKill', 
         {assFullName: user.fullName, assId: user._id, targetFullName: target.fullName, targetId: target._id}
@@ -80,7 +80,6 @@ const undoKill = {
   run({ assId, targetId }) {
     let target = Meteor.users.findOne({_id: targetId});
     let ass = Meteor.users.findOne({_id: assId});
-    console.log("TARGET: ", target, "\nUSER: ", ass);
     if (target && ass) {
         Meteor.users.update(targetId, {
             $set: {alive: true, targetId: ass.targetId, targetName: ass.targetName, status: "", killedby: ""}

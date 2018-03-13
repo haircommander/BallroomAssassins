@@ -25,7 +25,6 @@ Template.alive.helpers({
 Template.alive.events({
     'click #kill-button': function(e, instance) {
         e.preventDefault();
-        console.log("button pressed!");
         instance.amKilling.set(true);
     },
     'click #die-button': function(e, instance) {
@@ -46,36 +45,42 @@ Template.alive.events({
         var killCode = $('#kill-code').val();
         var id = user.targetId;
         if (user.targetName !== "" ) {
+            Bert.alert("Kill submitted, wait a moment to see how it went.", "default");
+            t.$(':input[type="submit"]').prop('disabled', true);
             Meteor.call('users.attemptKill',
               { id: id,
               killCode: killCode }
             , (err, res) => {
               if (err) {
-                console.log(err);
-                Bert.alert("You may have the wrong kill code!", "warning");
+                t.$(':input[type="submit"]').prop('disabled', false);
+                Bert.alert(err.reason, "warning");
               } else {
                 t.amKilling.set(false);
+                t.$(':input[type="submit"]').prop('disabled', false);
                 Bert.alert("Well done assassin, you now have your next assignment", "success");
               }
             });
+
+            //t.$('button[type="submit"]').attr('disabled','enabled');
         }
         else {
             Bert.alert("You do not have a target yet! Please wait for the game to start", "warning");
-            return err;
         }
     },
     'click #change-kill-code': function(e, t) {
         e.preventDefault();
         var user = Meteor.user();
         var killCode = $('#kill-code-input').val();
+        t.$(':input[type="submit"]').prop('disabled', true);
         Meteor.call('users.changeKillCode',
           {killCode: killCode }
         , (err, res) => {
           if (err) {
-            console.log(err);
-            Bert.alert("Error in changing kill code!", "warning");
+            Bert.alert(err.reason, "warning");
+            t.$(':input[type="submit"]').prop('disabled', false);
           } else {
             Bert.alert("Kill code successfully changed!", "success");
+            t.$(':input[type="submit"]').prop('disabled', false);
           }
         });
     }

@@ -27,7 +27,6 @@ const shuffleTargets = {
   run({}) {
     let users = Meteor.users.find({alive: true}).fetch();
     shuffle(users);
-    console.log(users);
     let target = users[users.length - 1];
     users.forEach(user => {
         Meteor.users.update({_id: user._id}, {

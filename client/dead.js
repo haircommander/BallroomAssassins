@@ -15,10 +15,15 @@ Template.dead.events({
           agentName: user.agentName }
         , (err, res) => {
           if (err) {
-            Bert.alert("Error adding annoucement", "warning");
+            Bert.alert(err.reason, "warning");
           } else {
-            Meteor.call('users.finishObituary', {}, (err, res) => {if (err) {console.log(err);}}); 
-            Bert.alert("Thanks for your obituary", "success");
+            Meteor.call('users.finishObituary', {}, (err, res) => {
+                if (err) {
+                    Bert.alert(err.reason, "failure");    
+                } else {
+                    Bert.alert("Thanks for your obituary", "success");
+                }
+            }); 
           }
         });
     }
