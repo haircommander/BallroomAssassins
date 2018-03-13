@@ -118,7 +118,7 @@ Meteor.publish('Meteor.users.alive', function() {
 
 Meteor.publish('Meteor.users.leaderboard', function() {
     if (this.userId) {
-      return Meteor.users.find({roles: {$size: 1}}, {sort: {kills: -1, fullName: -1}, fields: {agentName: 1, kills: 1, alive: 1}});
+      return Meteor.users.find({roles: {$size: 1}}, {sort: {kills: -1, fullName: 1}, fields: {agentName: 1, kills: 1, alive: 1}});
     } else {
         return this.ready();
     }
