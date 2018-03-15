@@ -15,16 +15,3 @@ Template.announcements.helpers({
     }
 });
 
-/*
-Template.register.events({
-    /*
-        Meteor.call(
-          'sendEmail',
-          'Peter <peterjh@umich.edu>',
-          'umdbtassassins.gmail.com',
-          'Hello from Meteor!',
-          'This is a test of Email.send.'
-        );   
-
-});
-*/
