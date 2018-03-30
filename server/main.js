@@ -9,7 +9,7 @@ Meteor.startup(() => {
             agentName: "GD"
         });
         Meteor.users.update(id, {
-            $set: {alive: false}
+            $set: {alive: false, kills: -1}
         });
         Roles.addUsersToRoles(id, ['gamedirector']);
     } catch (err){}
@@ -22,7 +22,7 @@ Meteor.startup(() => {
             agentName: "Super Admin"
         });
         Meteor.users.update(id, {
-            $set: {alive: false}
+            $set: {alive: false, kills: -1}
         });
         Roles.addUsersToRoles(id, ['admin']);
     }

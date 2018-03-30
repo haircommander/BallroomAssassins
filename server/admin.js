@@ -59,17 +59,22 @@ const assignGhosts = {
   // Factor out Method body so that it can be called independently (3)
   run({}) {
     let users = Meteor.users.find({alive: true, kills: 0}).fetch();
-    let ghosts = Meteor.users.find({alive: false, status: ""}).fetch();
-    shuffle(users);
-    ghosts.forEach(ghost => {
-      Meteor.users.update({_id: ghost._id}, {
-        $set: { 
-          targetId: target._id,
-          targetName: target.fullName
-        }
+    let ghosts = Meteor.users.find({alive: false, status: {$ne: "no-obituary"}, kills: {$ne: -1}}).fetch();
+    console.log(ghosts);
+    if (ghosts) {
+      shuffle(users);
+      let i = 0;
+      ghosts.forEach(ghost => {
+        Meteor.users.update({_id: ghost._id}, {
+          $set: { 
+            targetId: users[i]._id,
+            targetName: users[i].fullName,
+            status: "ghost"
+          }
+        });
+        i += 1;
       });
-      target = user;
-    });
+    }
   },
   // Call Method by referencing the JS object (4)
   // Also, this lets us specify Meteor.apply options once in
