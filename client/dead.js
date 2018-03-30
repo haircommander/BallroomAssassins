@@ -4,6 +4,14 @@ Template.dead.onCreated(function deadOnCreated() {
     Meteor.subscribe('Meteor.users.agentName');
   });
 });
+Template.dead.helpers({
+    obituary() {
+        return Meteor.user().status === "no-obituary";  
+    },
+    ghost() {
+        return Meteor.user().status === "ghost";
+    }
+)};
 
 Template.dead.events({
     'click #submit-obituary': function(e, t) {

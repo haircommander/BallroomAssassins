@@ -32,6 +32,21 @@ Template.admin.events({
         });
         //return false;
     },
+    'click #ghost-button': function(e, t) {
+        e.preventDefault();
+        t.$(':input[type="submit"]').prop('disabled', true);
+        Meteor.call('admin.assignGhosts',
+          {}
+        , (err, res) => {
+          if (err) {
+            Bert.alert(err.reason, "danger");
+            t.$(':input[type="submit"]').prop('disabled', false);
+          } else {
+            Bert.alert("ghosts assigned", "success");
+            t.$(':input[type="submit"]').prop('disabled', false);
+          }
+        });
+    },
     'click #logout-button': function(e, t) {
         e.preventDefault();
         Meteor.logout(function(error) {

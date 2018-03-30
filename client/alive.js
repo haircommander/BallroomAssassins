@@ -49,7 +49,8 @@ Template.alive.events({
             t.$(':input[type="submit"]').prop('disabled', true);
             Meteor.call('users.attemptKill',
               { id: id,
-              killCode: killCode }
+              killCode: killCode,
+              ghost: false }
             , (err, res) => {
               if (err) {
                 t.$(':input[type="submit"]').prop('disabled', false);

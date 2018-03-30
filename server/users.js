@@ -4,27 +4,39 @@ const attemptKill = {
   validate(args) {
     new SimpleSchema({
       id: {type: String},
-      killCode: {type: String}
+      killCode: {type: String},
+      ghost: {type: Boolean}
     }).validate(args)
   },
   // Factor out Method body so that it can be called independently (3)
-  run({ id, killCode }) {
+  run({ id, killCode, ghost }) {
     let target = Meteor.users.findOne({_id: id});
     let user = Meteor.users.findOne({_id: this.userId});
     if (killCode !== target.killCode) {
-        throw new Meteor.Error('users.kills.wrongcode', "Wrong kill code!");
+      throw new Meteor.Error('users.kills.wrongcode', "Wrong kill code!");
     }
     Meteor.call('kills.addKill', 
-        {assFullName: user.fullName, assId: user._id, targetFullName: target.fullName, targetId: target._id}
+      {assFullName: user.fullName, assId: user._id, targetFullName: target.fullName, targetId: target._id}
     );
-    Meteor.users.update(this.userId, {
-        $set: {targetId: target.targetId,
-            kills: user.kills + 1,
-            targetName: target.targetName
-            }
-    });
+    if (!ghost) {
+      Meteor.users.update(this.userId, {
+        $set: {
+          targetId: target.targetId,
+          kills: user.kills + 1,
+          targetName: target.targetName
+        }
+      });
+    } else {
+      let targetAssassin = Meteor.users.findOne({targetId: id, alive: true});
+      Meteor.users.update({_id: targetAssassin}, {
+        $set: {
+          targetId: target.targetId,
+          targetName: target.targetName
+        }
+      });
+    }
     Meteor.users.update({_id: id}, {
-        $set: {alive: false, targetId: "", targetName: "", status: "no-obituary", killedby: user.agentName}
+      $set: {alive: false, targetId: "", targetName: "", status: "no-obituary", killedby: user.agentName}
     });
   },
   // Call Method by referencing the JS object (4)
