@@ -100,5 +100,3 @@ Meteor.methods({
   }
 });
 
-
-shuffleTargets

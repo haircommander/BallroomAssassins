@@ -1,5 +1,5 @@
 <template name="dead">
-  <h3> I'm sorry, you've been killed by Agent {{killedby}} :( </h3>
+  <h2>I'm sorry, you've been killed by Agent {{killedby}}</h2>
   {{#if obituary}}
      <h3>Submit your final words, story your demise, or plea for vengence (using only their agent name).</h3>
      <div class="ui input">
@@ -8,4 +8,24 @@
      <br><br>
      <button class="ui blue huge button" id="submit-obituary"  type="submit">Submit Obituary</button>
   {{/if}} 
+  {{#if ghost}}
+     <h2>You've been revived as a ghost!<br>
+     Your current target is {{targetName}}</h2>
+     {{#if killing}}
+     <form class="ui form" id="kill-form" >
+       <div class="field">
+         <h3>Put your target's kill code here:</h3>
+         <div class="ui input">
+           <input class="" type="text" id="kill-code" />
+         </div> 
+         <br><br>
+         <button class="ui blue huge button" id="finish-them"  type="submit">Finish Assassination</button>
+         <button class="ui blue huge button" id="false-alarm-kill"  type="submit">nvm</button>
+       </div>
+     </form>
+    {{else}}
+      <button class="ui blue huge button" id="kill-button" type="submit">Kill</button>
+    {{/if}}
+     
+  {{/if}}
 </template>

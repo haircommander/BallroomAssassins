@@ -19,6 +19,7 @@ const attemptKill = {
       {assFullName: user.fullName, assId: user._id, targetFullName: target.fullName, targetId: target._id}
     );
     if (!ghost) {
+      console.log("not ghost");
       Meteor.users.update(this.userId, {
         $set: {
           targetId: target.targetId,
@@ -38,6 +39,7 @@ const attemptKill = {
     Meteor.users.update({_id: id}, {
       $set: {alive: false, targetId: "", targetName: "", status: "no-obituary", killedby: user.agentName}
     });
+    console.log(Meteor.users.find({_id: id}).fetch());
   },
   // Call Method by referencing the JS object (4)
   // Also, this lets us specify Meteor.apply options once in
