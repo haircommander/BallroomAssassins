@@ -34,6 +34,12 @@ const attemptKill = {
           targetName: target.targetName
         }
       });
+      Meteor.users.update({targetId: this.userId}, {
+        $set: {
+          targetId: "",
+          targetName: ""
+        }
+      });
     } else {
       let targetAssassin = Meteor.users.findOne({targetId: id, alive: true});
       Meteor.users.update({_id: targetAssassin._id}, {
