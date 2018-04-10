@@ -60,15 +60,14 @@ const assignGhosts = {
   run({}) {
     let users = Meteor.users.find({alive: true, kills: 0}).fetch();
     let ghosts = Meteor.users.find({alive: false, status: {$ne: "no-obituary"}, kills: {$ne: -1}}).fetch();
-    console.log(ghosts);
     if (ghosts) {
       shuffle(users);
       let i = 0;
       ghosts.forEach(ghost => {
         Meteor.users.update({_id: ghost._id}, {
           $set: { 
-            targetId: users[i]._id,
-            targetName: users[i].fullName,
+            targetId: users[i % users.length]._id,
+            targetName: users[i % users.length].fullName,
             status: "ghost"
           }
         });

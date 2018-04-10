@@ -68,7 +68,7 @@ Template.dead.events({
               } else {
                 t.amKilling.set(false);
                 t.$(':input[type="submit"]').prop('disabled', false);
-                Bert.alert("Well done assassin, you now have your next assignment", "success");
+                Bert.alert("Well done ghost, your next assignment will be sent when targets are reassigned.", "success");
               }
             });
 
