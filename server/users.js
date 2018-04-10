@@ -34,7 +34,7 @@ const attemptKill = {
           targetName: target.targetName
         }
       });
-      Meteor.users.update({targetId: this.userId}, {
+      Meteor.users.update({targetId: this.userId, alive: false}, {
         $set: {
           targetId: "",
           targetName: ""
