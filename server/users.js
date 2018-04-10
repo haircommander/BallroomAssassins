@@ -39,7 +39,8 @@ const attemptKill = {
       Meteor.users.update({_id: targetAssassin._id}, {
         $set: {
           targetId: target.targetId,
-          targetName: target.targetName
+          targetName: target.targetName,
+          ghostKills: user.ghostKills + 1
         }
       },
       (err, res) => {
@@ -53,7 +54,7 @@ const attemptKill = {
               'Ballroom Assassins Admin',
               "[Ballroom Assassins] Target Change",
               text
-          );            
+          );
         } 
       });
     }

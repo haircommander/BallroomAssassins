@@ -64,13 +64,24 @@ const assignGhosts = {
       shuffle(users);
       let i = 0;
       ghosts.forEach(ghost => {
+        let ghostKills = (ghost.ghostKills) ? ghost.ghostKills : 0;
         Meteor.users.update({_id: ghost._id}, {
           $set: { 
             targetId: users[i % users.length]._id,
             targetName: users[i % users.length].fullName,
+            ghostKills: ghostKills,
             status: "ghost"
           }
         });
+        let text = "Hello Agent " + ghost.agentName + ",\n\nYou have been assigned a target as a ghost! "
+        text += "Your current target is " + users[i % users.length].fullName;
+        text += ".\nRemember, making a kill as a ghost does not increase your total kill count, but ghost kills will be tracked, which means you can win in ghost kills.";
+        Meteor.call('sendEmail',
+            ghost.emails[0].address,
+            'Ballroom Assassins Admin',
+            "[Ballroom Assassins] Ghost Assignment",
+            text
+        );
         i += 1;
       });
     }
